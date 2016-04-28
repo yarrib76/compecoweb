@@ -44,11 +44,20 @@ class ControladorCrearLoginMovil extends Controller {
         if ($usuario){
             return $repuesta[0] = ['valor' => 'El usuario ya Existe'];
         }
+        $session_id = $this->crearSessionId();
         User::create([
             'email' => $email,
             'password' => Hash::make($password),
+            'session_id' => $session_id,
         ]);
         $repuesta[0] = ['valor' => "2"];
+        $repuesta[1] = ['session_id' => $session_id];
         return $repuesta;
+    }
+
+    //Creo un # aleatorio para la session del usuario
+    public function crearSessionId(){
+        $session_id = rand(1,100000);
+        return $session_id;
     }
 }
