@@ -57,7 +57,7 @@ class ControladorCrearLoginMovil extends Controller {
         User::create([
             'email' => $email,
             'password' => Hash::make($password),
-            'nombre' => $nombre,
+            'name' => $nombre,
             'apellido' => $apellido,
             'session_id' => $session_id,
         ]);
