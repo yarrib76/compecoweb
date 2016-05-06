@@ -38,7 +38,7 @@ class ControladorLogin extends Controller {
 	{
 		if (Hash::check($password, $usuario->password)){
 			$session_id = CrearSession::crearSessionId();
-			$usuario->update(['session_id' => $session_id])->save();
+			$usuario->update(['session_id' => $session_id]);
 			return [ 'valor' => $session_id];
 		}
 		return [ 'valor' => 2];
