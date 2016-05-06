@@ -37,8 +37,11 @@ class ControladorLogin extends Controller {
 	public function validarPassword($usuario, $password)
 	{
 		if (Hash::check($password, $usuario->password)){
-			return [ 'valor' => 1];
+			$session_id = CrearSession::crearSessionId();
+			return [ 'valor' => $session_id];
 		}
 		return [ 'valor' => 2];
 	}
+
+
 }

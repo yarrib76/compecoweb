@@ -3,7 +3,6 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
@@ -52,7 +51,7 @@ class ControladorCrearLoginMovil extends Controller {
         if ($usuario){
             return $repuesta = [ 'valor' => 4];
         }
-        $session_id = $this->crearSessionId();
+        $session_id = CrearSession::crearSessionId();
         User::create([
             'email' => $email,
             'password' => Hash::make($password),
@@ -60,11 +59,5 @@ class ControladorCrearLoginMovil extends Controller {
         ]);
         $repuesta = [ 'valor' => $session_id];
         return $repuesta;
-    }
-
-    //Creo un # aleatorio para la session del usuario
-    public function crearSessionId(){
-        $session_id = rand(100,100000);
-        return $session_id;
     }
 }
