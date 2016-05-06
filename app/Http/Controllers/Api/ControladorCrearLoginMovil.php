@@ -12,11 +12,13 @@ class ControladorCrearLoginMovil extends Controller {
     public function crearUsuario(){
         $email = Input::get('email');
         $password = Input::get('password');
+        $nombre = Input::get('nombre');
+        $apellido = Input::get('apellido');
         $codigoValidacion = Input::get('codval');
         if ($codigoValidacion == 4015){
             $esValido = $this->validacion($email,$password);
             if ($esValido['valor'] == 0 ){
-                $respuesta = $this->crear($email,$password);
+                $respuesta = $this->crear($email,$password,$nombre,$apellido);
                 return Response::json($respuesta);
             }
             return Response::json($esValido);
@@ -46,7 +48,7 @@ class ControladorCrearLoginMovil extends Controller {
     //Creo el usuario con la password encriptada
     //Si el usuario ya existia devuelve valor = 4
     //Si lo crea devuelve un random
-    public function crear($email,$password){
+    public function crear($email,$password,$nombre,$apellido){
         $usuario = User::where("email",$email)->first();
         if ($usuario){
             return $repuesta = [ 'valor' => 4];
@@ -55,6 +57,8 @@ class ControladorCrearLoginMovil extends Controller {
         User::create([
             'email' => $email,
             'password' => Hash::make($password),
+            'nombre' => $nombre,
+            'apellido' => $apellido,
             'session_id' => $session_id,
         ]);
         $repuesta = [ 'valor' => $session_id];
