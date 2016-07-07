@@ -20,6 +20,9 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
+//Deàrtamentos
+Route::resource('departamento', 'Departamentos\DepartamentosController');
+
 Route::group(['prefix' => 'api'],
     function () {
 

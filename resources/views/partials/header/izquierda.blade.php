@@ -21,7 +21,7 @@
                     Departamentos <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="/actividad"> Crear </a></li>
+                    <li><a href="/departamento"> Crear </a></li>
                     <li><a href="/asignarprofesor"> Asignar a un Profesor </a></li>
                 </ul>
             </li>

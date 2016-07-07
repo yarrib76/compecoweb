@@ -3,7 +3,6 @@
 use Illuminate\Database\Eloquent\Model;
 
 class Departamentos extends Model {
-
-	//
-
+    protected $table = 'departamentos';
+    protected $fillable = ['direccion','estado_id'];
 }
