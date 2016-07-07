@@ -1,61 +1,50 @@
-@extends('app')
+@extends('layouts.master')
 
-@section('content')
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
-				<div class="panel-heading">Login</div>
-				<div class="panel-body">
-					@if (count($errors) > 0)
-						<div class="alert alert-danger">
-							<strong>Whoops!</strong> There were some problems with your input.<br><br>
-							<ul>
-								@foreach ($errors->all() as $error)
-									<li>{{ $error }}</li>
-								@endforeach
-							</ul>
+@section('contenido')
+<div class="container">
+<div class="row">
+	<div class="col-sm-8 col-sm-offset-2">
+		<div class="panel panel-default">
+			<div class="panel-heading">Ingresar</div>
+			<div class="panel-body">
+
+				@include('errors.basic')
+				<form class="form-horizontal" role="form" method="POST" action="/auth/login">
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<div class="form-group">
+						<label for="correo" class="col-sm-3 control-label">Correo Electronico</label>
+						<div class="col-sm-6">
+							<input type="email" id="correo" name="email" class="form-control" placeholder="Correo" autocapitalize="off" value="{{ old('email') }}">
 						</div>
-					@endif
-
-					<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">E-Mail Address</label>
-							<div class="col-md-6">
-								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
+					</div>
+					<div class="form-group">
+						<label for="password" class="col-sm-3 control-label">Password</label>
+						<div class="col-sm-6">
+							<input type="password" name="password" class="form-control" placeholder="Password">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-3 col-sm-6">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="remember"> Recordarme
+								</label>
 							</div>
 						</div>
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">Password</label>
-							<div class="col-md-6">
-								<input type="password" class="form-control" name="password">
-							</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-3 col-sm-3">
+							<button type="submit" class="btn btn-primary" name="ingresar"><i class="fa fa-btn fa-sign-in" ></i>Ingresar</button>
 						</div>
-
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								<div class="checkbox">
-									<label>
-										<input type="checkbox" name="remember"> Remember Me
-									</label>
-								</div>
-							</div>
+						<div class="col-sm-3">
+							<div id="forgot-password-link" class="btn btn-link"><a href="/password/email">Olvide mi password</a></div>
 						</div>
+					</div>
+				</form>
 
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary">Login</button>
-
-								<a class="btn btn-link" href="{{ url('/password/email') }}">Forgot Your Password?</a>
-							</div>
-						</div>
-					</form>
-				</div>
 			</div>
 		</div>
 	</div>
 </div>
-@endsection
+</div>
+@stop
