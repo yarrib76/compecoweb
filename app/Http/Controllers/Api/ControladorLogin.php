@@ -17,7 +17,7 @@ class ControladorLogin extends Controller {
 			$password = $this->validarPassword($repuesta, Input::get('password'));
 			return Response::json($password);
 		}
-		return Response::json($repuesta);
+		return Response::json([ 'valor' => 0]);
 	}
 
 	//Verifica si existe el usuario, si existe retorna el objeto usuario,
@@ -37,8 +37,12 @@ class ControladorLogin extends Controller {
 	public function validarPassword($usuario, $password)
 	{
 		if (Hash::check($password, $usuario->password)){
-			return 1;
+			$session_id = CrearSession::crearSessionId();
+			$usuario->update(['session_id' => $session_id]);
+			return [ 'valor' => $session_id];
 		}
-		return 2;
+		return [ 'valor' => 2];
 	}
+
+
 }
