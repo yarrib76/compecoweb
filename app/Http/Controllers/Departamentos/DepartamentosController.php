@@ -1,9 +1,11 @@
 <?php namespace App\Http\Controllers\Departamentos;
 
+use App\Http\Controllers\Api\EstadoDeptos;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Models\Departamentos;
+use App\Models\EstadosDeptos;
 use Illuminate\Http\Request;
 
 class DepartamentosController extends Controller {
@@ -16,7 +18,6 @@ class DepartamentosController extends Controller {
 	public function index()
 	{
         $departamentos = Departamentos::get();
-        dd($departamentos);
         return view('departamentos.reporte', compact('departamentos'));
 	}
 
@@ -27,8 +28,10 @@ class DepartamentosController extends Controller {
 	 */
 	public function create()
 	{
-		//
-	}
+        $estados = EstadosDeptos::all();
+        $estados = $this->formateoDatosEstadoDeptos($estados);
+        return view ('departamentos.nuevo', compact('estados'));
+    }
 
 	/**
 	 * Store a newly created resource in storage.
@@ -84,4 +87,12 @@ class DepartamentosController extends Controller {
 		//
 	}
 
+    //Paso los datos a un array para porder levantarlo con el select de Profesores
+    public function formateoDatosEstadoDeptos($datos){
+
+        foreach ($datos as $dato){
+            $conFormato[$dato->id] = $dato->tipo;
+        }
+        return $conFormato;
+    }
 }
