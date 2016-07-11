@@ -32,4 +32,6 @@ Route::group(['prefix' => 'api'],
         Route::get('/loginmovil', 'Api\ControladorLogin@loginUsuarios');
         Route::get('/crearloginmovil', 'Api\ControladorCrearLoginMovil@crearUsuario');
         Route::get('/estado_departamentos', 'Api\EstadoDeptos@listadoEstado');
+        Route::get('/usuario_inquilinos', 'Api\UsuarioInquilino@listadoInquilinos');
+        Route::get('/departamentos', 'Api\ListadoDepartamentos@listadoDeptos');
     });

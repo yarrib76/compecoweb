@@ -1,5 +1,18 @@
 <div class="form-group">
 
+    <div class="form-group">
+
+        {!! Form::label('departamento', 'Departamento:', ['class' => 'col-sm-3 control-label']) !!}
+
+        <div class="col-sm-6">
+            @if (isset($estado_id))
+                {!! Form::select('departamento', $estados, $estado_id, ['id' => 'departamento', 'class' => 'form-control', 'name' => 'departamento_id']) !!}
+            @else
+                {!! Form::select('departamento', $estados, null, ['id' => 'departamento', 'class' => 'form-control', 'name' => 'departamento_id']) !!}
+            @endif
+        </div>
+    </div>
+
     {!! Form::label('nombre', 'Direccion :', ['class' => 'col-sm-3 control-label']) !!}
     <div class="col-sm-6">
         @if (!isset($departamento))
@@ -10,15 +23,3 @@
     </div>
 </div>
 
-<div class="form-group">
-
-    {!! Form::label('depto_estado', 'Estado:', ['class' => 'col-sm-3 control-label']) !!}
-
-    <div class="col-sm-6">
-        @if (isset($estado_id))
-            {!! Form::select('estado', $estados, $estado_id, ['id' => 'estado', 'class' => 'form-control', 'name' => 'estado_id']) !!}
-        @else
-            {!! Form::select('estado', $estados, null, ['id' => 'estado', 'class' => 'form-control', 'name' => 'estado_id']) !!}
-        @endif
-    </div>
-</div>
