@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: App
-        psr4_prefix: App
+        namespace: AlquilerAdmin
+        psr4_prefix: AlquilerAdmin
         src_path: app

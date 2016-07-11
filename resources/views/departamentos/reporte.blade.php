@@ -17,11 +17,11 @@
                                 <tbody>
                                     @foreach($departamentos as $departamento)
                                     <tr>
-                                        <td>{{$departamento->nombre}}</td>
-                                        <td>{{$departamento->estado}}</td>
+                                        <td>{{$departamento->direccion}}</td>
+                                        <td>{{$departamento->estado->tipo}}</td>
                                         <td>
                                             {!! HTML::linkRoute('departamento.edit', ' Editar', $departamento->id , ['class' => 'btn btn-primary'] ) !!}
-                                            {!! HTML::linkRoute('departamento.destroy', ' Borrar', $departamento->id , ['class' => 'btn btn-danger', 'data-method' => 'DELETE','data-confirm' => '¿Seguro desea eliminar la Actividad ' . $departamento->nombre . '?', 'rel' => 'nofollow']) !!}
+                                            {!! HTML::linkRoute('departamento.destroy', ' Borrar', $departamento->id , ['class' => 'btn btn-danger', 'data-method' => 'DELETE','data-confirm' => '¿Seguro desea eliminar la Actividad ' . $departamento->direccion . '?', 'rel' => 'nofollow']) !!}
                                         </td>
                                     </tr>
                                     @endforeach
@@ -54,14 +54,14 @@
                             search: "Buscar:",
                             "thousands": ",",
                             processing:     "Traitement en cours...",
-                            lengthMenu:    "Mostrar _MENU_ actividades",
-                            info:           "Mostrando del  _START_ al _END_ de _TOTAL_ actividades",
+                            lengthMenu:    "Mostrar _MENU_ departamentos",
+                            info:           "Mostrando del  _START_ al _END_ de _TOTAL_ departamentos",
                             infoEmpty:      "0 moviles",
-                            infoFiltered:   "(Filtrando _MAX_ actividades en total)",
+                            infoFiltered:   "(Filtrando _MAX_ departamentos en total)",
                             infoPostFix:    "",
                             loadingRecords: "Chargement en cours...",
-                            zeroRecords:    "No se encontraron actividades para esa busqueda",
-                            emptyTable:     "No existen actividades",
+                            zeroRecords:    "No se encontraron departamentos para esa busqueda",
+                            emptyTable:     "No existen departamentos",
                             paginate: {
                                 first:      "Primero",
                                 previous:   "Anterior",

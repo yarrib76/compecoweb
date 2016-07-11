@@ -1,12 +1,12 @@
-<?php namespace App\Http\Controllers\Departamentos;
+<?php namespace AlquilerAdmin\Http\Controllers\Departamentos;
 
-use App\Http\Controllers\Api\EstadoDeptos;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
-use App\Models\Departamentos;
-use App\Models\EstadosDeptos;
-use Illuminate\Http\Request;
+use AlquilerAdmin\Http\Requests;
+use AlquilerAdmin\Http\Controllers\Controller;
+use AlquilerAdmin\Models\Departamentos;
+use AlquilerAdmin\Models\EstadosDeptos;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Response;
 
 class DepartamentosController extends Controller {
 
@@ -17,7 +17,7 @@ class DepartamentosController extends Controller {
 	 */
 	public function index()
 	{
-        $departamentos = Departamentos::get();
+        $departamentos = Departamentos::get()->load('estado');
         return view('departamentos.reporte', compact('departamentos'));
 	}
 
@@ -40,7 +40,11 @@ class DepartamentosController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		Departamentos::create([
+			'direccion' => Input::get('direccion'),
+			'estado_id' => Input::get('estado_id'),
+		]);
+		return redirect()->route('departamento.index');
 	}
 
 	/**
@@ -62,7 +66,10 @@ class DepartamentosController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$departamento = Departamentos::find($id);
+		$estados = $this->formateoDatosEstadoDeptos(EstadosDeptos::all());
+		$estado_id = $departamento->estado_id;
+		return view ('departamentos.edit', compact('departamento','estado_id','estados'));
 	}
 
 	/**
@@ -73,7 +80,13 @@ class DepartamentosController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		db::table('departamentos')
+			->where('id', $id)
+			->update([
+				'direccion' => Input::get('direccion'),
+				'estado_id' => Input::get('estado_id')
+			]);
+		return redirect()->route('departamento.index');
 	}
 
 	/**
@@ -84,10 +97,12 @@ class DepartamentosController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		$departamento = Departamentos::find($id);
+		$departamento->delete();
+		return redirect()->route('departamento.index');
 	}
 
-    //Paso los datos a un array para porder levantarlo con el select de Profesores
+    //Paso los datos a un array para porder levantarlo con el select de EstadoDeptos
     public function formateoDatosEstadoDeptos($datos){
 
         foreach ($datos as $dato){
@@ -95,4 +110,9 @@ class DepartamentosController extends Controller {
         }
         return $conFormato;
     }
+
+	private function conviertoJson()
+	{
+		return json_encode(EstadosDeptos::all());
+	}
 }

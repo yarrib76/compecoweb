@@ -1,9 +1,9 @@
-<?php namespace App\Http\Controllers\Api;
+<?php namespace AlquilerAdmin\Http\Controllers\Api;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use AlquilerAdmin\Http\Requests;
+use AlquilerAdmin\Http\Controllers\Controller;
 
-use App\User;
+use AlquilerAdmin\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;

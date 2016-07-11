@@ -1,10 +1,9 @@
-<?php namespace App\Http\Controllers\Api;
+<?php namespace AlquilerAdmin\Http\Controllers\Api;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use AlquilerAdmin\Http\Requests;
+use AlquilerAdmin\Http\Controllers\Controller;
 
-use App\Models\EstadosDeptos;
-use Illuminate\Http\Request;
+use AlquilerAdmin\Models\EstadosDeptos;
 use Illuminate\Support\Facades\Response;
 
 class EstadoDeptos extends Controller {

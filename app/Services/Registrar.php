@@ -1,6 +1,6 @@
-<?php namespace App\Services;
+<?php namespace AlquilerAdmin\Services;
 
-use App\User;
+use AlquilerAdmin\User;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 

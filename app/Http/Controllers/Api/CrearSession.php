@@ -6,10 +6,10 @@
  * Time: 10:20 AM
  */
 
-namespace App\Http\Controllers\Api;
+namespace AlquilerAdmin\Http\Controllers\Api;
 
 
-use App\Http\Controllers\Controller;
+use AlquilerAdmin\Http\Controllers\Controller;
 
 class CrearSession extends Controller
 {
