@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+
+Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
 Route::get('home', 'HomeController@index');
 
@@ -22,6 +23,8 @@ Route::controllers([
 
 //Deàrtamentos
 Route::resource('departamento', 'Departamentos\DepartamentosController');
+//ContratosAlquiler
+Route::resource('contratoAlquiler', 'ContratosAlquiler\ContratosAlquilerController');
 
 Route::group(['prefix' => 'api'],
     function () {

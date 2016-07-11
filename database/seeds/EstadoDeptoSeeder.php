@@ -1,5 +1,5 @@
 <?php
-use App\Models\EstadosDeptos;
+use AlquilerAdmin\Models\EstadosDeptos;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
