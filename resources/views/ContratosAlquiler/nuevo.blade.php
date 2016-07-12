@@ -20,6 +20,3 @@
         </div>
     </div>
 @stop
-@section('extra-javascript')
-    <script src="/js/cargoInquilinosEnSelect.js"></script>
-@stop

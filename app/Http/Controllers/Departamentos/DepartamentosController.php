@@ -99,6 +99,8 @@ class DepartamentosController extends Controller {
 	{
 		$departamento = Departamentos::find($id);
 		$departamento->delete();
+        $departamento = new Departamentos();
+        $departamento->cambioEstadoDepto(Input::get('departamento_id'),'Libre');
 		return redirect()->route('departamento.index');
 	}
 
@@ -111,8 +113,4 @@ class DepartamentosController extends Controller {
         return $conFormato;
     }
 
-	private function conviertoJson()
-	{
-		return json_encode(EstadosDeptos::all());
-	}
 }

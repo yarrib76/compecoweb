@@ -1,25 +1,47 @@
 <div class="form-group">
-
     <div class="form-group">
-
-        {!! Form::label('departamento', 'Departamento:', ['class' => 'col-sm-3 control-label']) !!}
+        {!! Form::label('inquilino', 'Departamento:', ['class' => 'col-sm-3 control-label']) !!}
 
         <div class="col-sm-6">
-            @if (isset($estado_id))
-                {!! Form::select('departamento', $estados, $estado_id, ['id' => 'departamento', 'class' => 'form-control', 'name' => 'departamento_id']) !!}
+            @if (isset($depto_id))
+                {!! Form::select('departamento', $departamentos, $depto_id, ['id' => 'inquilino', 'class' => 'form-control', 'name' => 'departamento_id']) !!}
             @else
-                {!! Form::select('departamento', $estados, null, ['id' => 'departamento', 'class' => 'form-control', 'name' => 'departamento_id']) !!}
+                {!! Form::select('departamento', $departamentos, null, ['id' => 'inquilino', 'class' => 'form-control', 'name' => 'departamento_id']) !!}
             @endif
         </div>
     </div>
 
-    {!! Form::label('nombre', 'Direccion :', ['class' => 'col-sm-3 control-label']) !!}
-    <div class="col-sm-6">
-        @if (!isset($departamento))
-            {!! Form::input('direccion', 'direccion', null, ['id' => 'direccion', 'class' => 'form-control patente', 'name' => 'direccion', 'placeholder' => 'Direccion'])  !!}
-        @else
-            {!! Form::input('direccion', 'direccion', $departamento->direccion, ['id' => 'direccion', 'class' => 'form-control patente', 'name' => 'direccion', 'placeholder' => 'Direccion'])  !!}
-        @endif
+    <div class="form-group">
+        {!! Form::label('inquilino', 'Inquilino:', ['class' => 'col-sm-3 control-label']) !!}
+
+        <div class="col-sm-6">
+            @if (isset($inquilino_id))
+                {!! Form::select('inquilino', $inquilinos, $inquilino_id, ['id' => 'inquilino', 'class' => 'form-control', 'name' => 'inquilino_id']) !!}
+            @else
+                {!! Form::select('inquilino', $inquilinos, null, ['id' => 'inquilino', 'class' => 'form-control', 'name' => 'inquilino_id']) !!}
+            @endif
+        </div>
+    </div>
+    <div class="form-group">
+        {!! Form::label('fecha_inicio', 'Fecha Inicio:', ['class' => 'col-sm-3 control-label']) !!}
+
+    </div>
+    <div class="form-group">
+        {!! Form::label('fecha_fin', 'Fecha Fin:', ['class' => 'col-sm-3 control-label']) !!}
+
+    </div>
+    <div class="form-group">
+
+        {!! Form::label('precio', 'Valor Alquiler:', ['class' => 'col-sm-3 control-label']) !!}
+
+        <div class="col-sm-6">
+
+            @if (isset($precio))
+                {!! Form::input('number', 'precio', $costo, ['id' => 'precio', 'class' => 'form-control', 'name' => 'costo','placeholder' => 'Precio Mensual'])  !!}
+            @else
+                {!! Form::input('number', 'precio', null, ['id' => 'precio', 'class' => 'form-control', 'name' => 'costo','placeholder' => 'Precio Mensual'])  !!}
+            @endif
+        </div>
     </div>
 </div>
 
