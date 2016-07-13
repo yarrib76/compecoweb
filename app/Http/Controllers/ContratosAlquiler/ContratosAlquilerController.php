@@ -42,19 +42,23 @@ class ContratosAlquilerController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
-	{
-        $departamento = new Departamentos();
-        $departamento->cambioEstadoDepto(Input::get('departamento_id'),'Alquilado');
-        Alquileres::create([
-            'user_id' => Input::get('inquilino_id'),
-            'depto_id' => Input::get('departamento_id'),
-            'importe_alquiler' => Input::get('costo'),
-            'estado_alquiler' => true,
-        ]);
+    public function store()
+    {
+        if (!Input::get('departamento_id') == 0 && !Input::get('inquilino_id') == 0) {
+            $departamento = new Departamentos();
+            $departamento->cambioEstadoDepto(Input::get('departamento_id'), 'Alquilado');
+            Alquileres::create([
+                'user_id' => Input::get('inquilino_id'),
+                'depto_id' => Input::get('departamento_id'),
+                'importe_alquiler' => Input::get('costo'),
+                'fecha_inicio' => Input::get('fecha_inicio'),
+                'fecha_vencimiento' => Input::get('fecha_fin'),
+                'estado_alquiler' => true,
+            ]);
 
+        }
         return redirect()->route('contratoAlquiler.index');
-	}
+    }
 
 	/**
 	 * Display the specified resource.
@@ -75,8 +79,19 @@ class ContratosAlquilerController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
-	}
+        /**
+         * * por el momento no se utiliza
+         * 
+        $contratoAlquiler = Alquileres::find($id);
+        $departamento_id = $contratoAlquiler->depto_id;
+        $inquilino_id = $contratoAlquiler->user_id;
+        $departamentos = Departamentos::all()->load('estado');
+        $departamentos = $this->formateoDatos($departamentos);
+        $inquilinos = User::all()->load('userRoles');
+        $inquilinos = $this->formateoDatosInquilinos($inquilinos);
+        return view('contratosalquiler.edit', compact('contratoAlquiler','departamentos','inquilinos','departamento_id','inquilino_id'));
+        */
+    }
 
 	/**
 	 * Update the specified resource in storage.

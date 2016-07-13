@@ -24,7 +24,7 @@
                                         <td>{{$contratoAlquiler->fecha_inicio}}</td>
                                         <td>{{$contratoAlquiler->fecha_vencimiento}}</td>
                                         <td>
-                                            {!! HTML::linkRoute('contratoAlquiler.edit', ' Editar', $contratoAlquiler->id , ['class' => 'btn btn-primary'] ) !!}
+                                          <!--  {!! HTML::linkRoute('contratoAlquiler.edit', ' Editar', $contratoAlquiler->id , ['class' => 'btn btn-primary'] ) !!} -->
                                             {!! HTML::linkRoute('contratoAlquiler.destroy', ' Borrar', $contratoAlquiler->id , ['class' => 'btn btn-danger', 'data-method' => 'DELETE','data-confirm' => '¿Seguro desea eliminar el Contrato ' . $contratoAlquiler->departamento->direccion . '?', 'rel' => 'nofollow']) !!}
                                         </td>
                                     </tr>

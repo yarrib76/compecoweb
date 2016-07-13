@@ -32,7 +32,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	protected $hidden = ['password', 'remember_token'];
 
     public function userRoles(){
-        return $this->belongsTo('AlquilerAdmin\Models\UsersRoles', 'id');
+        return $this->belongsTo('AlquilerAdmin\Models\UsersRoles', 'id','user_id');
     }
 
 }

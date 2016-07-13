@@ -10,7 +10,7 @@ class ListadoDepartamentos extends Controller {
 
 	public function listadoDeptos()
 	{
-		return Response::json(Departamentos::all());	
+		return Response::json(Departamentos::all());
 
 	}
 

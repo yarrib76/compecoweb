@@ -24,10 +24,12 @@
     </div>
     <div class="form-group">
         {!! Form::label('fecha_inicio', 'Fecha Inicio:', ['class' => 'col-sm-3 control-label']) !!}
+        <input type="date" name="fecha_inicio" max="2040-12-31"><br><br>
 
     </div>
     <div class="form-group">
         {!! Form::label('fecha_fin', 'Fecha Fin:', ['class' => 'col-sm-3 control-label']) !!}
+        <input type="date" name="fecha_fin" max="2040-12-31"><br><br>
 
     </div>
     <div class="form-group">

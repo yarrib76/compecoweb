@@ -20,8 +20,8 @@ class CreateAlquileresTable extends Migration {
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('depto_id')->unsigned();
             $table->foreign('depto_id')->references('id')->on('departamentos');
-            $table->dateTime('fecha_inicio');
-            $table->dateTime('fecha_vencimiento');
+            $table->date('fecha_inicio');
+            $table->date('fecha_vencimiento');
             $table->double('importe_alquiler');
             $table->boolean('estado_alquiler');
         });

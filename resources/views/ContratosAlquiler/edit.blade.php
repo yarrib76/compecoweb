@@ -8,9 +8,9 @@
                     <div class="panel-body">
                         @include('errors.basic')
 
-                        {!! Form::model($departamento,[ 'route' => ['departamento.update',$departamento], 'method' => 'PATCH','class' => 'form-horizontal']) !!}
+                        {!! Form::model($contratoAlquiler,[ 'route' => ['departamento.update',$contratoAlquiler], 'method' => 'PATCH','class' => 'form-horizontal']) !!}
 
-                        @include('departamentos.form')
+                        @include('contratosalquiler.form')
                         <div class="col-sm-offset-3 col-sm-3">
                             <button type="submit" class="btn btn-primary" name="agregar"><i class="fa fa-btn fa-plus"></i> Modificar</button>
                         </div>
