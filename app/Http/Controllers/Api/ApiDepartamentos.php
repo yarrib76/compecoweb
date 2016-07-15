@@ -1,18 +1,19 @@
 <?php namespace AlquilerAdmin\Http\Controllers\Api;
 
+use AlquilerAdmin\Helper\Sesiones;
 use AlquilerAdmin\Http\Requests;
 use AlquilerAdmin\Http\Controllers\Controller;
-
+use AlquilerAdmin\Models\Alquileres;
 use AlquilerAdmin\Models\Departamentos;
 use AlquilerAdmin\User;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
-
-class ListadoDepartamentos extends Controller {
+class ApiDepartamentos extends Controller {
 
 	public function listadoDeptos()
 	{
-        $control = $this->validarSession();
+        $sesiones = new Sesiones();
+        $control = $sesiones->validarSession(Input::get('email'),Input::get('session_id'));
         if ($control){
             //$departamentos = $this->formateoDatos(Departamentos::all());
             return Response::json(Departamentos::all()->load('estado'));
@@ -21,14 +22,17 @@ class ListadoDepartamentos extends Controller {
 
 	}
 
-    private function validarSession()
+    public function listadoContrato()
     {
-        $session_id = User::where('email', Input::get('email'))->first()->session_id;
-        if ($session_id == Input::get('session_id')){
-            return true;
+        $sesiones = new Sesiones();
+        $control = $sesiones->validarSession(Input::get('email'), Input::get('session_id'));
+        if ($control) {
+            $contrato = Alquileres::where('depto_id',Input::get('depto_id'))->get()->load('usuario','departamento');
+            return Response::json($contrato);
         }
-        return false;
+        return "Invalid session_code ";
     }
+
 
     private function formateoDatos($datos)
     {

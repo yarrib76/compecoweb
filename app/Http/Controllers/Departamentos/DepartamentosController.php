@@ -99,8 +99,8 @@ class DepartamentosController extends Controller {
 	{
 		$departamento = Departamentos::find($id);
 		$departamento->delete();
-        $departamento = new Departamentos();
-        $departamento->cambioEstadoDepto(Input::get('departamento_id'),'Libre');
+       // $departamento = new Departamentos();
+       // $departamento->cambioEstadoDepto(Input::get('departamento_id'),'Libre');
 		return redirect()->route('departamento.index');
 	}
 
