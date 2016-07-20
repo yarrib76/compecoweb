@@ -27,7 +27,8 @@ class ApiDepartamentos extends Controller {
         $sesiones = new Sesiones();
         $control = $sesiones->validarSession(Input::get('email'), Input::get('session_id'));
         if ($control) {
-            $contrato = Alquileres::where('depto_id',Input::get('depto_id'))->get()->load('usuario','departamento');
+            $contrato = Alquileres::where('depto_id',Input::get('depto_id'))->where('estado_alquiler','1')->get()->load('usuario','departamento');
+           // $contrato = Alquileres::where('depto_id',Input::get('depto_id'))->get()->load('usuario','departamento');
             return Response::json($contrato);
         }
         return "Invalid session_code ";

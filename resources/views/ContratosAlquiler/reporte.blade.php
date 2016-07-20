@@ -25,7 +25,12 @@
                                         <td>{{$contratoAlquiler->fecha_vencimiento}}</td>
                                         <td>
                                           <!--  {!! HTML::linkRoute('contratoAlquiler.edit', ' Editar', $contratoAlquiler->id , ['class' => 'btn btn-primary'] ) !!} -->
-                                            {!! HTML::linkRoute('contratoAlquiler.destroy', ' Borrar', $contratoAlquiler->id , ['class' => 'btn btn-danger', 'data-method' => 'DELETE','data-confirm' => '¿Seguro desea eliminar el Contrato ' . $contratoAlquiler->departamento->direccion . '?', 'rel' => 'nofollow']) !!}
+                                            @if($contratoAlquiler->estado_alquiler)
+                                                {!! HTML::linkRoute('contratoAlquiler.destroy', ' Borrar', $contratoAlquiler->id , ['class' => 'btn btn-danger', 'data-method' => 'DELETE','data-confirm' => '¿Seguro desea eliminar el Contrato ' . $contratoAlquiler->departamento->direccion . '?', 'rel' => 'nofollow']) !!}
+                                                {!! HTML::linkRoute('contratoAlquilerDisable', ' Desactivar', $contratoAlquiler->id , ['class' => 'btn btn-primary'] ) !!}
+                                            @else
+                                                <a>Inactivo</a>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach

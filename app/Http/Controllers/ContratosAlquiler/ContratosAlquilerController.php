@@ -7,6 +7,7 @@ use AlquilerAdmin\Models\Alquileres;
 use AlquilerAdmin\Models\Departamentos;
 use AlquilerAdmin\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 class ContratosAlquilerController extends Controller {
@@ -101,7 +102,10 @@ class ContratosAlquilerController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+        db::table('alquileres')
+            ->where('id', $id)
+            ->update([
+                'estado_alquiler' => false]);
 	}
 
 	/**
@@ -112,7 +116,6 @@ class ContratosAlquilerController extends Controller {
 	 */
 	public function destroy($id)
 	{
-
 		$alquiler = Alquileres::find($id);
         $alquiler->delete();
         $departamento_id = $alquiler->depto_id;
@@ -121,6 +124,13 @@ class ContratosAlquilerController extends Controller {
         return redirect()->route('contratoAlquiler.index');
 	}
 
+    public function disable($id){
+        $this->update($id);
+        $depto_id = Alquileres::find($id)->depto_id;
+        $departamento = new Departamentos();
+        $departamento->cambioEstadoDepto($depto_id,'Libre');
+        return redirect()->route('contratoAlquiler.index');
+    }
     //Paso los datos a un array para porder levantarlo con el select
     public function formateoDatos($datos){
         $conFormato = "";
