@@ -4,40 +4,30 @@
         <div class="row">
             <div class="col-sm-12 ">
                 <div class="panel panel-primary">
-                    <div class="panel-heading"><i class="fa fa-cog">Lista de Contratos</i></div>
+                    <div class="panel-heading"><i class="fa fa-cog">Importes para departamento: {{$direccion}}</i></div>
                     <div class="panel-body">
                             <table id="reporte" class="table table-striped table-bordered records_list">
                                 <thead>
                                     <tr>
-                                        <th>Departamento</th>
-                                        <th>Inquilino</th>
-                                        <th>Fecha Ingreso</th>
-                                        <th>Fecha Fin Contrato</th>
+                                        <th>Fecha</th>
+                                        <th>Importe</th>
                                         <th>Accion</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($contratosAlquileres as $contratoAlquiler)
+                                    @foreach($importesAlquiler as $importeAlquiler)
                                     <tr>
-                                        <td>{{$contratoAlquiler->departamento->direccion}}</td>
-                                        <td>{{$contratoAlquiler->usuario->name}}</td>
-                                        <td>{{$contratoAlquiler->fecha_inicio}}</td>
-                                        <td>{{$contratoAlquiler->fecha_vencimiento}}</td>
+                                        <td>{{$importeAlquiler->fecha}}</td>
+                                        <td>{{$importeAlquiler->importe_alquiler}}</td>
                                         <td>
-                                          <!--  {!! HTML::linkRoute('contratoAlquiler.edit', ' Editar', $contratoAlquiler->id , ['class' => 'btn btn-primary'] ) !!} -->
-                                            @if($contratoAlquiler->estado_alquiler)
-                                                {!! HTML::linkRoute('contratoAlquiler.destroy', ' Borrar', $contratoAlquiler->id , ['class' => 'btn btn-danger', 'data-method' => 'DELETE','data-confirm' => '¿Seguro desea eliminar el Contrato ' . $contratoAlquiler->departamento->direccion . '?', 'rel' => 'nofollow']) !!}
-                                                {!! HTML::linkRoute('contratoAlquilerImporte.index', ' Importes   ', ['contrato_id' => $contratoAlquiler->id] , ['class' => 'btn btn-primary'] ) !!}
-                                                {!! HTML::linkRoute('contratoAlquilerDisable', ' Desactivar', $contratoAlquiler->id , ['class' => 'btn btn-primary'] ) !!}
-                                            @else
-                                                <a>Inactivo</a>
-                                            @endif
+                                          <!--  {!! HTML::linkRoute('contratoAlquilerImporte.edit', ' Editar', $importeAlquiler->id , ['class' => 'btn btn-primary'] ) !!} -->
+                                                {!! HTML::linkRoute('contratoAlquilerImporte.destroy', ' Borrar', ['importe_id' => $importeAlquiler->id, 'contrato_id' => $contrato_id] , ['class' => 'btn btn-danger', 'data-method' => 'DELETE','data-confirm' => '¿Seguro desea eliminar el Contrato ' . $importeAlquiler->importe_alquiler . '?', 'rel' => 'nofollow']) !!}
                                         </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            {!! HTML::linkRoute('contratoAlquiler.create', ' Nuevo Contrato', null , ['class' => 'btn btn-primary'] ) !!}
+                            {!! HTML::linkRoute('contratoAlquilerImporte.create', 'Agregar Importe', ['contrato_id' => $contrato_id] , ['class' => 'btn btn-primary'] ) !!}
                     </div>
                 </div>
             </div>
@@ -64,14 +54,14 @@
                             search: "Buscar:",
                             "thousands": ",",
                             processing:     "Traitement en cours...",
-                            lengthMenu:    "Mostrar _MENU_ contratos",
-                            info:           "Mostrando del  _START_ al _END_ de _TOTAL_ contratos",
+                            lengthMenu:    "Mostrar _MENU_ importes",
+                            info:           "Mostrando del  _START_ al _END_ de _TOTAL_ importes",
                             infoEmpty:      "0 moviles",
-                            infoFiltered:   "(Filtrando _MAX_ contratos en total)",
+                            infoFiltered:   "(Filtrando _MAX_ importes en total)",
                             infoPostFix:    "",
                             loadingRecords: "Chargement en cours...",
-                            zeroRecords:    "No se encontraron contratos para esa busqueda",
-                            emptyTable:     "No existen contratos",
+                            zeroRecords:    "No se encontraron importes para esa busqueda",
+                            emptyTable:     "No existen importes",
                             paginate: {
                                 first:      "Primero",
                                 previous:   "Anterior",

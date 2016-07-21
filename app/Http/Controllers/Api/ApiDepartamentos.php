@@ -5,7 +5,6 @@ use AlquilerAdmin\Http\Requests;
 use AlquilerAdmin\Http\Controllers\Controller;
 use AlquilerAdmin\Models\Alquileres;
 use AlquilerAdmin\Models\Departamentos;
-use AlquilerAdmin\User;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 class ApiDepartamentos extends Controller {
@@ -27,6 +26,7 @@ class ApiDepartamentos extends Controller {
         $sesiones = new Sesiones();
         $control = $sesiones->validarSession(Input::get('email'), Input::get('session_id'));
         if ($control) {
+            //Solo obtengo los contratos de alquiler que estan activos
             $contrato = Alquileres::where('depto_id',Input::get('depto_id'))->where('estado_alquiler','1')->get()->load('usuario','departamento');
            // $contrato = Alquileres::where('depto_id',Input::get('depto_id'))->get()->load('usuario','departamento');
             return Response::json($contrato);

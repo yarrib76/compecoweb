@@ -51,7 +51,7 @@ class ContratosAlquilerController extends Controller {
             Alquileres::create([
                 'user_id' => Input::get('inquilino_id'),
                 'depto_id' => Input::get('departamento_id'),
-                'importe_alquiler' => Input::get('costo'),
+            //    'importe_alquiler' => Input::get('costo'),
                 'fecha_inicio' => Input::get('fecha_inicio'),
                 'fecha_vencimiento' => Input::get('fecha_fin'),
                 'estado_alquiler' => true,

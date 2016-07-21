@@ -25,6 +25,7 @@ Route::controllers([
 Route::resource('departamento', 'Departamentos\DepartamentosController');
 //ContratosAlquiler
 Route::resource('contratoAlquiler', 'ContratosAlquiler\ContratosAlquilerController');
+Route::resource('contratoAlquilerImporte', 'ContratosAlquiler\ImporteAlquilerController');
 Route::get('contratoAlquilerDisable/{id}', ['as' => 'contratoAlquilerDisable', 'uses' => 'ContratosAlquiler\ContratosAlquilerController@disable']);
 
 
