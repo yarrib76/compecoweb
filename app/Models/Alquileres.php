@@ -15,4 +15,7 @@ class Alquileres extends Model {
         return $this->belongsTo('AlquilerAdmin\Models\Departamentos', 'depto_id');
     }
 
+    public function alquilerImportes(){
+        return $this->hasMany('AlquilerAdmin\Models\ImporteAlquileres', 'alquiler_id');
+    }
 }
