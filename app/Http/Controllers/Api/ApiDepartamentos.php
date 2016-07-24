@@ -28,9 +28,13 @@ class ApiDepartamentos extends Controller {
         $control = $sesiones->validarSession(Input::get('email'), Input::get('session_id'));
         if ($control) {
             //Solo obtengo los contratos de alquiler que estan activos
+           //Creo el objeto contrato con relacion en usuario y departamento.
             $contrato = Alquileres::where('depto_id',Input::get('depto_id'))->where('estado_alquiler','1')->get()->load('usuario','departamento');
-           // $contrato = Alquileres::where('depto_id',Input::get('depto_id'))->get()->load('usuario','departamento');
-            $contrato = $this->formateoDato($contrato);
+            $importe = $this->formateoDato($contrato);
+            //Vuelvo a crear el objeto para quitar la relacion con AlquileresImporte que le agrego
+            //en el metodo formateoDatos
+            $contrato = Alquileres::where('depto_id',Input::get('depto_id'))->where('estado_alquiler','1')->get()->load('usuario','departamento');
+            $contrato[0]->importe_alquiler = $importe;
             return Response::json($contrato);
         }
         return "Invalid session_code ";
@@ -47,8 +51,7 @@ class ApiDepartamentos extends Controller {
         {
             $dato->load('alquilerImportes');
             $importe = $this->verificoImporte($dato->alquilerImportes);
-            $dato->importe_alquiler = $importe;
-            return $dato;
+            return $importe;
         }
     }
 
