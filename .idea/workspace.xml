@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e224fc9a-c16a-458f-8eb8-31e84b842a17" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ContratosAlquiler/ContratosAlquilerController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ContratosAlquiler/ContratosAlquilerController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ContratosAlquiler/ImporteAlquilerController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ContratosAlquiler/ImporteAlquilerController.php" />
     </list>
     <ignored path="compraeconomica.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,11 +59,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ContratosAlquilerController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ContratosAlquilerController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ContratosAlquiler/ContratosAlquilerController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.45454547" vertical-offset="1748" max-vertical-offset="3021">
+            <state vertical-scroll-proportion="-10.178572" vertical-offset="1748" max-vertical-offset="3021">
               <caret line="115" column="7" selection-start-line="115" selection-start-column="7" selection-end-line="115" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="reporte.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/ContratosAlquiler/reporte.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.142858" vertical-offset="323" max-vertical-offset="1748">
+              <caret line="29" column="157" selection-start-line="29" selection-start-column="157" selection-end-line="29" selection-end-column="157" />
+              <folding>
+                <marker date="1469056122000" expanded="true" signature="1784:2050" placeholder="..." />
+                <marker date="1469056122000" expanded="true" signature="1801:2048" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImporteAlquilerController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ContratosAlquiler/ImporteAlquilerController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.1818181" vertical-offset="1254" max-vertical-offset="1881">
+              <caret line="32" column="31" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -132,12 +155,12 @@
         <option value="$PROJECT_DIR$/resources/views/ContratosAlquiler/importes/nuevo.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/ContratosAlquiler/importes/form.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/ContratosAlquiler/importes/reporte.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/ContratosAlquiler/ImporteAlquilerController.php" />
         <option value="$PROJECT_DIR$/app/Models/ImporteAlquileres.php" />
         <option value="$PROJECT_DIR$/app/Models/Alquileres.php" />
         <option value="$PROJECT_DIR$/resources/views/ContratosAlquiler/form.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/ApiDepartamentos.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ContratosAlquiler/ContratosAlquilerController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ContratosAlquiler/ImporteAlquilerController.php" />
       </list>
     </option>
   </component>
@@ -932,24 +955,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/ContratosAlquiler/reporte.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.178572" vertical-offset="266" max-vertical-offset="1748">
-          <caret line="29" column="157" selection-start-line="29" selection-start-column="157" selection-end-line="29" selection-end-column="157" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2016_07_20_224427_create_importe_alquileres_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.376" vertical-offset="145" max-vertical-offset="798">
           <caret line="21" column="76" selection-start-line="21" selection-start-column="76" selection-end-line="21" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ContratosAlquiler/ImporteAlquilerController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2736" vertical-offset="190" max-vertical-offset="1976">
-          <caret line="19" column="87" selection-start-line="19" selection-start-column="87" selection-end-line="19" selection-end-column="87" />
         </state>
       </provider>
     </entry>
@@ -1026,8 +1035,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ContratosAlquiler/ContratosAlquilerController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45454547" vertical-offset="1748" max-vertical-offset="3021">
+        <state vertical-scroll-proportion="-10.178572" vertical-offset="1748" max-vertical-offset="3021">
           <caret line="115" column="7" selection-start-line="115" selection-start-column="7" selection-end-line="115" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/ContratosAlquiler/reporte.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.142858" vertical-offset="323" max-vertical-offset="1748">
+          <caret line="29" column="157" selection-start-line="29" selection-start-column="157" selection-end-line="29" selection-end-column="157" />
+          <folding>
+            <marker date="1469056122000" expanded="true" signature="1784:2050" placeholder="..." />
+            <marker date="1469056122000" expanded="true" signature="1801:2048" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ContratosAlquiler/ImporteAlquilerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.1818181" vertical-offset="1254" max-vertical-offset="1881">
+          <caret line="32" column="31" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
           <folding />
         </state>
       </provider>

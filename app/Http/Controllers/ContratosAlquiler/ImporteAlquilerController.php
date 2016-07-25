@@ -19,7 +19,7 @@ class ImporteAlquilerController extends Controller {
         $contrato_id = Input::get('contrato_id');
         $importesAlquiler = ImporteAlquileres::where('alquiler_id', $contrato_id)->get();
         $direccion = Alquileres::find($contrato_id)->load('departamento')->departamento->direccion;
-        return view('contratosalquiler.importes.reporte', compact('importesAlquiler', 'contrato_id', 'direccion'));
+        return view('ContratosAlquiler.importes.reporte', compact('importesAlquiler', 'contrato_id', 'direccion'));
 	}
 
 	/**
@@ -30,7 +30,7 @@ class ImporteAlquilerController extends Controller {
 	public function create()
 	{
         $contrato_id = (Input::get('contrato_id'));
-        return view('contratosalquiler.importes.nuevo', compact('contrato_id'));
+        return view('ContratosAlquiler.importes.nuevo', compact('contrato_id'));
     }
 
 	/**
