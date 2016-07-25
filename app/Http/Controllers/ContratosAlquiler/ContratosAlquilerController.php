@@ -20,7 +20,7 @@ class ContratosAlquilerController extends Controller {
 	public function index()
 	{
 		$contratosAlquileres = Alquileres::all()->load('usuario','departamento');
-		return view('contratosalquiler.reporte', compact('contratosAlquileres'));
+		return view('contratosAlquiler.reporte', compact('contratosAlquileres'));
 
 	}
 
@@ -35,7 +35,7 @@ class ContratosAlquilerController extends Controller {
         $departamentos = $this->formateoDatos($departamentos);
         $inquilinos = User::all()->load('userRoles');
         $inquilinos = $this->formateoDatosInquilinos($inquilinos);
-        return view('contratosalquiler.nuevo', compact('departamentos','inquilinos'));
+        return view('contratosAlquiler.nuevo', compact('departamentos','inquilinos'));
     }
 
 	/**
