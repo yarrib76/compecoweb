@@ -49,7 +49,10 @@ class ApiDepartamentos extends Controller {
     {
         foreach ($datos as $dato)
         {
-            $dato->load('alquilerImportes');
+            $dato->load(['alquilerImportes' => function($query)
+            {
+                $query->orderBy('fecha','asc');
+            }]);
             $importe = $this->verificoImporte($dato->alquilerImportes);
             return $importe;
         }
