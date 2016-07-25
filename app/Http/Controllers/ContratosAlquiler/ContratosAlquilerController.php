@@ -20,7 +20,7 @@ class ContratosAlquilerController extends Controller {
 	public function index()
 	{
 		$contratosAlquileres = Alquileres::all()->load('usuario','departamento');
-		return view('contratosAlquiler.reporte', compact('contratosAlquileres'));
+		return view('ContratosAlquiler.reporte', compact('contratosAlquileres'));
 
 	}
 
@@ -35,7 +35,7 @@ class ContratosAlquilerController extends Controller {
         $departamentos = $this->formateoDatos($departamentos);
         $inquilinos = User::all()->load('userRoles');
         $inquilinos = $this->formateoDatosInquilinos($inquilinos);
-        return view('contratosAlquiler.nuevo', compact('departamentos','inquilinos'));
+        return view('ContratosAlquiler.nuevo', compact('departamentos','inquilinos'));
     }
 
 	/**
@@ -58,7 +58,7 @@ class ContratosAlquilerController extends Controller {
             ]);
 
         }
-        return redirect()->route('contratoAlquiler.index');
+        return redirect()->route('ContratoAlquiler.index');
     }
 
 	/**
@@ -90,7 +90,7 @@ class ContratosAlquilerController extends Controller {
         $departamentos = $this->formateoDatos($departamentos);
         $inquilinos = User::all()->load('userRoles');
         $inquilinos = $this->formateoDatosInquilinos($inquilinos);
-        return view('contratosalquiler.edit', compact('contratoAlquiler','departamentos','inquilinos','departamento_id','inquilino_id'));
+        return view('contratosalquiler.edit', compact('ContratoAlquiler','departamentos','inquilinos','departamento_id','inquilino_id'));
         */
     }
 
@@ -121,7 +121,7 @@ class ContratosAlquilerController extends Controller {
         $departamento_id = $alquiler->depto_id;
         $departamento = new Departamentos();
         $departamento->cambioEstadoDepto($departamento_id,'Libre');
-        return redirect()->route('contratoAlquiler.index');
+        return redirect()->route('ContratoAlquiler.index');
 	}
 
     public function disable($id){
@@ -129,7 +129,7 @@ class ContratosAlquilerController extends Controller {
         $depto_id = Alquileres::find($id)->depto_id;
         $departamento = new Departamentos();
         $departamento->cambioEstadoDepto($depto_id,'Libre');
-        return redirect()->route('contratoAlquiler.index');
+        return redirect()->route('ContratoAlquiler.index');
     }
     //Paso los datos a un array para porder levantarlo con el select
     public function formateoDatos($datos){
