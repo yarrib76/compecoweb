@@ -148,6 +148,7 @@ class ContratosAlquilerController extends Controller {
     //Paso los datos a un array para porder levantarlo con el select de Inquilino
     public function formateoDatosInquilinos($datos){
         $conFormato = "";
+        dd($datos);
         foreach ($datos as $dato) {
             if ($dato->userRoles->load('roles')->roles->nombre == "Inquilino") {
                 $conFormato[$dato->id] = $dato->name;
