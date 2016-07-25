@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddObservacionesToImporteAlquileresTable extends Migration {
+class AddObservacionesToCobroAlquileresTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,10 @@ class AddObservacionesToImporteAlquileresTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('importe_alquileres', function(Blueprint $table)
+		Schema::table('cobro_alquileres', function(Blueprint $table)
 		{
-			$table->string('observaciones',200);
-		});
+            $table->string('observaciones',200);
+        });
 	}
 
 	/**
@@ -25,7 +25,7 @@ class AddObservacionesToImporteAlquileresTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('importe_alquileres', function(Blueprint $table)
+		Schema::table('cobro_alquileres', function(Blueprint $table)
 		{
             $table->string('observaciones',200);
         });
