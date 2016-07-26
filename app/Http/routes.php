@@ -38,4 +38,5 @@ Route::group(['prefix' => 'api'],
         Route::get('/usuario_inquilinos', 'Api\UsuarioInquilino@listadoInquilinos');
         Route::get('/departamentos', 'Api\ApiDepartamentos@listadoDeptos');
         Route::get('/departamento_contrato', 'Api\ApiDepartamentos@listadoContrato');
+        Route::get('/guardar_cobro_alquiler', 'Api\ApiSavePagoAlquiler@procesarPago');
     });
