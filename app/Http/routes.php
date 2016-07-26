@@ -39,4 +39,6 @@ Route::group(['prefix' => 'api'],
         Route::get('/departamentos', 'Api\ApiDepartamentos@listadoDeptos');
         Route::get('/departamento_contrato', 'Api\ApiDepartamentos@listadoContrato');
         Route::get('/guardar_cobro_alquiler', 'Api\ApiSavePagoAlquiler@procesarPago');
+        Route::get('/consulta_impuestos', 'Api\ConsultaImpuestos@consulta');
+        Route::get('/control_pago_impuestos', 'Api\ApiSavePagoImpuestos@procesarPago');
     });

@@ -7,7 +7,7 @@ class EstadoDeudasSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('estado_impuestos')->delete();
+        DB::table('estados_deudas')->delete();
         $this->crearEstadoDeudas();
 
     }
