@@ -27,7 +27,7 @@ class AddObservacionesToCobroAlquileresTable extends Migration {
 	{
 		Schema::table('cobro_alquileres', function(Blueprint $table)
 		{
-            $table->string('observaciones',200);
+        //    $table->string('observaciones',200);
         });
 	}
 

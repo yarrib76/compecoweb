@@ -4,6 +4,7 @@ use AlquilerAdmin\Helper\Sesiones;
 use AlquilerAdmin\Http\Requests;
 use AlquilerAdmin\Http\Controllers\Controller;
 use AlquilerAdmin\Models\CobroAlquileres;
+use AlquilerAdmin\Models\RegistroCobroAlquileres;
 use AlquilerAdmin\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -41,23 +42,41 @@ class ApiSavePagoAlquiler extends Controller {
             ->where('id', $cobroAlquilerId)
             ->update([
                 'importe_alquiler' => $importeActual + $importeAlquiler]);
+        $this->creoRegistroDelCobro($cobroAlquilerId,$importeAlquiler);
     }
     /*
      * Verifico si hay algun pago parcial.
      * Si hay, le sumo el nuevo pago
      */
     public function verificoPagoAnterior(){
-        //A ESTE QUERY LE FALTA QUE BUESQUE POR AÑO (ejemplo: DESDE EL 01-01-2016, HASTA 31-21-2016)
-        $cobroAlquileres = CobroAlquileres::orderBy('fecha_cobro', 'asc')->
-        where('alquiler_id',Input::get('alquiler_id'))->get();
+        //A ESTE QUERY LE FALTA QUE BUESQUE POR AÑO (ejemplo: DESDE EL 01-01-2016, HASTA 31-12-2016)
+        $fechaCobro = date('m-Y', strtotime(Input::get('fecha_cobro')));
+        $año = date('Y', strtotime(Input::get('fecha_cobro')));
+        $cobroAlquileres = CobroAlquileres::orderBy('fecha_cobro', 'asc')
+            ->where('fecha_cobro', '>=' , $año . '/01/01')
+            ->where('fecha_cobro', '<=', $año . '/12/31')
+            ->where('alquiler_id',Input::get('alquiler_id'))->get();
         foreach ($cobroAlquileres  as $cobroAlquiler){
-            $mesAnio = date('m-y',strtotime($cobroAlquiler->fecha_cobro));
-            $fechaCobro = date('m-y', strtotime(Input::get('fecha_cobro')));
+            $mesAnio = date('m-Y',strtotime($cobroAlquiler->fecha_cobro));
             if ($fechaCobro == $mesAnio){
                 $this->actualizoPago($cobroAlquiler->id, $cobroAlquiler->importe_alquiler,
                     Input::get('importe_alquiler'));
                 return true;
             }
         }
+    }
+
+    /*
+     * Esta funcion registra los cobros parciales de alquiler.
+     * Si se paga el total no registra.
+     * Ejemplo (Si un inquilino paga el alquiler en varias veces, se regitran
+     * los pagos adicionales)
+     */
+    public function creoRegistroDelCobro($cobroAlquilerId,$importeAlquiler){
+        RegistroCobroAlquileres::create([
+            'fecha_pago' => Input::get('fecha_cobro'),
+            'cobro_alquiler_id' => $cobroAlquilerId,
+            'importe_alquiler' => $importeAlquiler
+            ]);
     }
 }
