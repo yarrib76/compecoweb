@@ -4,8 +4,6 @@ use AlquilerAdmin\Http\Requests;
 use AlquilerAdmin\Http\Controllers\Controller;
 
 use AlquilerAdmin\Models\CobroAlquileres;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 
