@@ -30,40 +30,42 @@ class ReporteAlquileresPagos extends Controller {
             $mes = date('m',strtotime($cobroAlquiler->fecha_cobro));
             switch ($mes){
                 Case 1:
-                    $mesesPagos[1] = 1;
+                    $mesesPagos[1] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
+               //     $mesesPagos[1] = 1;
                     break;
                 Case 2:
-                    $mesesPagos[2] = 1;
+                    $mesesPagos[2] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
                 Case 3:
-                    $mesesPagos[3] = 1;
+                    $mesesPagos[3] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
                 Case 4:
-                    $mesesPagos[4] = 1;
+                    $mesesPagos[4] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
                 Case 5:
-                    $mesesPagos[5] = 1;
+                    $mesesPagos[5] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
                 Case 6:
-                    $mesesPagos[6] = 1;
+                   // $mesesPagos[6] = 1;
+                    $mesesPagos[6] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
                 Case 7:
-                    $mesesPagos[7] = 1;
+                    $mesesPagos[7] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
                 Case 8:
-                    $mesesPagos[8] = 1;
+                    $mesesPagos[8] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
                 Case 9:
-                    $mesesPagos[9] = 1;
+                    $mesesPagos[9] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
                 Case 10:
-                    $mesesPagos[10] = 1;
+                    $mesesPagos[10] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
                 Case 11:
-                    $mesesPagos[11] = 1;
+                    $mesesPagos[11] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
                 Case 12:
-                    $mesesPagos[12] = 1;
+                    $mesesPagos[12] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
             }
         }
@@ -75,7 +77,7 @@ class ReporteAlquileresPagos extends Controller {
      */
     public function initMeses(){
         for ($i = 1; $i <= 12; $i++ ){
-            $meses[$i] = 0;
+            $meses[$i] = ['Estado' => 0, 'Importe' => 0];
         }
         return $meses;
     }

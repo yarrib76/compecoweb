@@ -49,7 +49,6 @@ class ApiSavePagoAlquiler extends Controller {
      * Si hay, le sumo el nuevo pago
      */
     public function verificoPagoAnterior(){
-        //A ESTE QUERY LE FALTA QUE BUESQUE POR AÑO (ejemplo: DESDE EL 01-01-2016, HASTA 31-12-2016)
         $fechaCobro = date('m-Y', strtotime(Input::get('fecha_cobro')));
         $año = date('Y', strtotime(Input::get('fecha_cobro')));
         $cobroAlquileres = CobroAlquileres::orderBy('fecha_cobro', 'asc')
