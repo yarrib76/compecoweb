@@ -10,8 +10,11 @@ use Illuminate\Support\Facades\Response;
 class ReporteAlquileresPagos extends Controller {
 
     public function reportes(){
-        $cobroAlquileres = CobroAlquileres::orderBy('fecha_cobro', 'asc')->
-        where('alquiler_id',Input::get('alquiler_id'))->get();
+        $anio = Input::get('anio');
+        $cobroAlquileres = CobroAlquileres::orderBy('fecha_cobro', 'asc')
+            ->where('fecha_cobro', '>=' , $anio . '/01/01')
+            ->where('fecha_cobro', '<=', $anio . '/12/31')
+            ->where('alquiler_id',Input::get('alquiler_id'))->get();
         $meses = $this->obtengoMeses($cobroAlquileres);
         return Response::json($meses);
 }

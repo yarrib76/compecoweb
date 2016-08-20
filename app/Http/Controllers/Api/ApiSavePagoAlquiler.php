@@ -41,7 +41,9 @@ class ApiSavePagoAlquiler extends Controller {
         db::table('cobro_alquileres')
             ->where('id', $cobroAlquilerId)
             ->update([
-                'importe_alquiler' => $importeActual + $importeAlquiler]);
+                'importe_alquiler' => $importeActual + $importeAlquiler,
+                'observaciones' => Input::get('observaciones'),
+            ]);
         $this->creoRegistroDelCobro($cobroAlquilerId,$importeAlquiler);
     }
     /*
@@ -75,7 +77,7 @@ class ApiSavePagoAlquiler extends Controller {
         RegistroCobroAlquileres::create([
             'fecha_pago' => Input::get('fecha_cobro'),
             'cobro_alquiler_id' => $cobroAlquilerId,
-            'importe_alquiler' => $importeAlquiler
+            'importe_alquiler' => $importeAlquiler,
             ]);
     }
 }
