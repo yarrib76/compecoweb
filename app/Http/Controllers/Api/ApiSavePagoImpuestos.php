@@ -27,10 +27,12 @@ class ApiSavePagoImpuestos extends Controller{
         $impuestos['metrogas'] = Input::get('metrogas');
         $impuestos['edesur'] = Input::get('edesur');
         $impuestos['expensas'] = Input::get('expensas');
+        $impuestos['aysa'] = Input::get('aysa');
         $abl_id = Impuestos::where('nombre','abl')->first()->id;
         $metrogas_id = Impuestos::where('nombre','metrogas')->first()->id;
         $edesur_id = Impuestos::where('nombre','edesur')->first()->id;
         $expensas_id = Impuestos::where('nombre','expensas')->first()->id;
+        $aysa_id = Impuestos::where('nombre','aysa')->first()->id;
         if ($impuestos['abl'] == 1){
             $estadoDeudaId = new EstadosDeuda();
             EstadoImpuestos::create([
@@ -94,6 +96,23 @@ class ApiSavePagoImpuestos extends Controller{
             $estadoDeudaId = new EstadosDeuda();
             EstadoImpuestos::create([
                 'impuesto_id' => $expensas_id,
+                'fecha_pago' => Input::get('fecha_pago'),
+                'estado_deuda_id'=>$estadoDeudaId->obtengoEstadoId('Tiene Deuda'),
+                'alquiler_id' => Input::get('alquiler_id')
+            ]);
+        }
+        if ($impuestos['aysa'] == 1){
+            $estadoDeudaId = new EstadosDeuda();
+            EstadoImpuestos::create([
+                'impuesto_id' => $aysa_id,
+                'fecha_pago' => Input::get('fecha_pago'),
+                'estado_deuda_id'=>$estadoDeudaId->obtengoEstadoId('Al Dia'),
+                'alquiler_id' => Input::get('alquiler_id')
+            ]);
+        } elseif($impuestos['aysa'] == 2){
+            $estadoDeudaId = new EstadosDeuda();
+            EstadoImpuestos::create([
+                'impuesto_id' => $aysa_id,
                 'fecha_pago' => Input::get('fecha_pago'),
                 'estado_deuda_id'=>$estadoDeudaId->obtengoEstadoId('Tiene Deuda'),
                 'alquiler_id' => Input::get('alquiler_id')

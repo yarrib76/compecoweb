@@ -15,7 +15,8 @@ class ReporteImpuestosPagos extends Controller {
     public function reportes(){
         $anio = Input::get('anio');
         /*
-         * Query ordenado por fecha y filtrado por año
+         * Query de los impuestos pagos por alquiler_id,
+         * ordenado por fecha y filtrado por año
          */
         $cobroImpuestos = EstadoImpuestos::orderBy('fecha_pago', 'asc')
             ->where('fecha_pago', '>=' , $anio . '/01/01')
