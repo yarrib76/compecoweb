@@ -42,4 +42,5 @@ Route::group(['prefix' => 'api'],
         Route::get('/consulta_impuestos', 'Api\ConsultaImpuestos@consulta');
         Route::get('/control_pago_impuestos', 'Api\ApiSavePagoImpuestos@procesarPago');
         Route::get('/reporte_alquileres_pagos', 'Api\ReporteAlquileresPagos@reportes');
+        Route::get('/reporte_impuestos_pagos', 'Api\ReporteImpuestosPagos@reportes');
     });
