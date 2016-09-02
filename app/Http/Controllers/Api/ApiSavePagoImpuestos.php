@@ -42,13 +42,7 @@ class ApiSavePagoImpuestos extends Controller{
                 'alquiler_id' => Input::get('alquiler_id')
             ]);
         } elseif ($impuestos['abl'] == 2){
-            $estadoDeudaId = new EstadosDeuda();
-            EstadoImpuestos::create([
-                'impuesto_id' => $abl_id,
-                'fecha_pago' => Input::get('fecha_pago'),
-                'estado_deuda_id'=>$estadoDeudaId->obtengoEstadoId('Tiene Deuda'),
-                'alquiler_id' => Input::get('alquiler_id')
-            ]);
+            $this->deleteEstadoImpuesto($abl_id);
         }
         if ($impuestos['metrogas'] == 1){
             $estadoDeudaId = new EstadosDeuda();
@@ -59,13 +53,7 @@ class ApiSavePagoImpuestos extends Controller{
                 'alquiler_id' => Input::get('alquiler_id')
             ]);
         } elseif ($impuestos['metrogas'] == 2){
-            $estadoDeudaId = new EstadosDeuda();
-            EstadoImpuestos::create([
-                'impuesto_id' => $metrogas_id,
-                'fecha_pago' => Input::get('fecha_pago'),
-                'estado_deuda_id'=>$estadoDeudaId->obtengoEstadoId('Tiene Deuda'),
-                'alquiler_id' => Input::get('alquiler_id')
-            ]);
+            $this->deleteEstadoImpuesto($metrogas_id);
         }
         if ($impuestos['edesur'] == 1){
             $estadoDeudaId = new EstadosDeuda();
@@ -76,13 +64,7 @@ class ApiSavePagoImpuestos extends Controller{
                 'alquiler_id' => Input::get('alquiler_id')
             ]);
         } elseif($impuestos['edesur'] == 2){
-            $estadoDeudaId = new EstadosDeuda();
-            EstadoImpuestos::create([
-                'impuesto_id' => $edesur_id,
-                'fecha_pago' => Input::get('fecha_pago'),
-                'estado_deuda_id'=>$estadoDeudaId->obtengoEstadoId('Tiene Deuda'),
-                'alquiler_id' => Input::get('alquiler_id')
-            ]);
+            $this->deleteEstadoImpuesto($edesur_id);
         }
         if ($impuestos['expensas'] == 1){
             $estadoDeudaId = new EstadosDeuda();
@@ -93,13 +75,7 @@ class ApiSavePagoImpuestos extends Controller{
                 'alquiler_id' => Input::get('alquiler_id')
             ]);
         } elseif($impuestos['expensas'] == 2){
-            $estadoDeudaId = new EstadosDeuda();
-            EstadoImpuestos::create([
-                'impuesto_id' => $expensas_id,
-                'fecha_pago' => Input::get('fecha_pago'),
-                'estado_deuda_id'=>$estadoDeudaId->obtengoEstadoId('Tiene Deuda'),
-                'alquiler_id' => Input::get('alquiler_id')
-            ]);
+            $this->deleteEstadoImpuesto($expensas_id);
         }
         if ($impuestos['aysa'] == 1){
             $estadoDeudaId = new EstadosDeuda();
@@ -110,6 +86,9 @@ class ApiSavePagoImpuestos extends Controller{
                 'alquiler_id' => Input::get('alquiler_id')
             ]);
         } elseif($impuestos['aysa'] == 2){
+            $this->deleteEstadoImpuesto($aysa_id);
+            /*
+             * Medoto viejo, ahora borro los registros
             $estadoDeudaId = new EstadosDeuda();
             EstadoImpuestos::create([
                 'impuesto_id' => $aysa_id,
@@ -117,6 +96,25 @@ class ApiSavePagoImpuestos extends Controller{
                 'estado_deuda_id'=>$estadoDeudaId->obtengoEstadoId('Tiene Deuda'),
                 'alquiler_id' => Input::get('alquiler_id')
             ]);
+            */
         }
+    }
+
+    public function deleteEstadoImpuesto($impuesto_id)
+    {
+        $fechaPgo = date('m-Y', strtotime(Input::get('fecha_pago')));
+        $año = date('Y', strtotime(Input::get('fecha_pago')));
+        $estadoImpuestos = EstadoImpuestos::orderBy('fecha_pago', 'asc')
+            ->where('fecha_pago', '>=' , $año . '/01/01')
+            ->where('fecha_pago', '<=', $año . '/12/31')
+            ->where('alquiler_id',Input::get('alquiler_id'))
+            ->where('impuesto_id',$impuesto_id)->get();
+        foreach ($estadoImpuestos  as $estadoImpuesto){
+            $mesAnio = date('m-Y',strtotime($estadoImpuesto->fecha_pago));
+            if ($fechaPgo == $mesAnio){
+                $estadoImpuesto->delete();
+            }
+        }
+        return true;
     }
 }
