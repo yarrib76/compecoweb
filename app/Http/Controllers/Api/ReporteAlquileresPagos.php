@@ -111,7 +111,6 @@ class ReporteAlquileresPagos extends Controller {
                 }
             }
         }
-        dd($importesAlquiler);
         return $estado;
     }
 }
