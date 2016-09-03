@@ -3,7 +3,9 @@
 use AlquilerAdmin\Http\Requests;
 use AlquilerAdmin\Http\Controllers\Controller;
 
+use AlquilerAdmin\Models\Alquileres;
 use AlquilerAdmin\Models\CobroAlquileres;
+use AlquilerAdmin\Models\ImporteAlquileres;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 
@@ -27,46 +29,57 @@ class ReporteAlquileresPagos extends Controller {
 
         $mesesPagos = $this->initMeses();
         foreach($cobroAlquileres as $cobroAlquiler){
-            //dd($cobroAlquiler->fecha_cobro);
             $mes = date('m',strtotime($cobroAlquiler->fecha_cobro));
             switch ($mes){
                 Case 1:
-                    $mesesPagos[1] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
+                    $estado = $this->verificoEstado($cobroAlquiler);
+                    $mesesPagos[1] = ['Estado' => $estado, 'Importe' => $cobroAlquiler->importe_alquiler];
                //     $mesesPagos[1] = 1;
                     break;
                 Case 2:
-                    $mesesPagos[2] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
+                    $estado = $this->verificoEstado($cobroAlquiler);
+                    $mesesPagos[2] = ['Estado' => $estado, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
                 Case 3:
-                    $mesesPagos[3] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
+                    $estado = $this->verificoEstado($cobroAlquiler);
+                    $mesesPagos[3] = ['Estado' => $estado, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
                 Case 4:
-                    $mesesPagos[4] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
+                    $estado = $this->verificoEstado($cobroAlquiler);
+                    $mesesPagos[4] = ['Estado' => $estado, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
                 Case 5:
-                    $mesesPagos[5] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
+                    $estado = $this->verificoEstado($cobroAlquiler);
+                    $mesesPagos[5] = ['Estado' => $estado, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
                 Case 6:
-                   // $mesesPagos[6] = 1;
-                    $mesesPagos[6] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
+                    $estado = $this->verificoEstado($cobroAlquiler);
+                    // $mesesPagos[6] = 1;
+                    $mesesPagos[6] = ['Estado' => $estado, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
                 Case 7:
-                    $mesesPagos[7] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
+                    $estado = $this->verificoEstado($cobroAlquiler);
+                    $mesesPagos[7] = ['Estado' => $estado, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
                 Case 8:
-                    $mesesPagos[8] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
+                    $estado = $this->verificoEstado($cobroAlquiler);
+                    $mesesPagos[8] = ['Estado' => $estado, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
                 Case 9:
-                    $mesesPagos[9] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
+                    $estado = $this->verificoEstado($cobroAlquiler);
+                    $mesesPagos[9] = ['Estado' => $estado, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
                 Case 10:
-                    $mesesPagos[10] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
+                    $estado = $this->verificoEstado($cobroAlquiler);
+                    $mesesPagos[10] = ['Estado' => $estado, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
                 Case 11:
-                    $mesesPagos[11] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
+                    $estado = $this->verificoEstado($cobroAlquiler);
+                    $mesesPagos[11] = ['Estado' => $estado, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
                 Case 12:
-                    $mesesPagos[12] = ['Estado' => 1, 'Importe' => $cobroAlquiler->importe_alquiler];
+                    $estado = $this->verificoEstado($cobroAlquiler);
+                    $mesesPagos[12] = ['Estado' => $estado, 'Importe' => $cobroAlquiler->importe_alquiler];
                     break;
             }
         }
@@ -81,5 +94,24 @@ class ReporteAlquileresPagos extends Controller {
             $meses[$i] = ['Estado' => 0, 'Importe' => 0];
         }
         return $meses;
+    }
+
+    public function verificoEstado($cobroAlquiler){
+        $estado = 0;
+        $importesAlquileres = ImporteAlquileres::orderBy('fecha', 'asc')
+        ->where('alquiler_id',Input::get('alquiler_id'))->get();
+        foreach ($importesAlquileres as $importesAlquiler)
+        {
+            if ($cobroAlquiler->fecha_cobro >= $importesAlquiler->fecha)
+            {
+                if ($cobroAlquiler->importe_alquiler < $importesAlquiler->importe_alquiler){
+                    $estado = 2;
+                } else {
+                    $estado = 1;
+                }
+            }
+        }
+        dd($importesAlquiler);
+        return $estado;
     }
 }
