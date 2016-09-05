@@ -28,7 +28,11 @@ class AddImpuestosSeeder extends Seeder {
         ]);
         Impuestos::create([
 
-            'nombre' => 'expensas   '
+            'nombre' => 'expensas'
+        ]);
+        Impuestos::create([
+
+            'nombre' => 'aysa'
         ]);
         return;
     }
