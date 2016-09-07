@@ -96,6 +96,12 @@ class ReporteAlquileresPagos extends Controller {
         return $meses;
     }
 
+    /* Verifico si el importe que se abono es menor al que le corresponde
+       segun valores estipulados por contrato.
+       Si es menor estado = 2 (No completo el pago toal).
+       De lo contrario estado = 1.
+       Con esto la apps Android pone de coloer Verde o Amarillo
+    */
     public function verificoEstado($cobroAlquiler){
         $estado = 0;
         $importesAlquileres = ImporteAlquileres::orderBy('fecha', 'asc')
