@@ -1,8 +1,10 @@
 <?php namespace AlquilerAdmin\Http\Controllers\Api;
 
+use AlquilerAdmin\Helper\Emails;
 use AlquilerAdmin\Helper\Sesiones;
 use AlquilerAdmin\Http\Requests;
 use AlquilerAdmin\Http\Controllers\Controller;
+use AlquilerAdmin\Models\Alquileres;
 use AlquilerAdmin\Models\CobroAlquileres;
 use AlquilerAdmin\Models\RegistroCobroAlquileres;
 use AlquilerAdmin\User;
@@ -19,6 +21,7 @@ class ApiSavePagoAlquiler extends Controller {
                 $this->creoPago();
             }
             // Retorna 1 si se grabo el dato correctamente.
+            $this->enviarMail();
             return ['codigo' => 1];
         }else{
             return "Invalid session_code ";
@@ -79,5 +82,31 @@ class ApiSavePagoAlquiler extends Controller {
             'cobro_alquiler_id' => $cobroAlquilerId,
             'importe_alquiler' => $importeAlquiler,
             ]);
+    }
+
+    public function enviarMail(){
+        $destinatarios = User::all()->load('userRoles');
+        $email = new Emails();
+        $mes = date('m', strtotime(Input::get('fecha_cobro')));
+        $meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio',
+            'Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+        $datos = ['inquilino' => Alquileres::where('id', Input::get('alquiler_id'))
+                    ->where('estado_alquiler', 1)
+                    ->get()->load('usuario')[0]->usuario->name,
+                  'fecha' => $meses[$mes - 1],
+                  'cobrador' => User::where('email', Input::get('email'))->get()[0]->name,
+                  'departamento' => Alquileres::where('id', Input::get('alquiler_id'))
+                      ->where('estado_alquiler', 1)
+                      ->get()->load('departamento')[0]->departamento->direccion,
+                  'importe' => Input::get('importe_alquiler')];
+        foreach ($destinatarios as $destinatario){
+            if ($destinatario->userRoles->role_id == 1){
+                $email->enviarMail('emails.confirmacion',
+                    $datos,
+                    ['email'=>$destinatario->email,
+                        'nombre'=>$destinatario->name],
+                    "Notificacion de Cobro Alquiler");
+            }
+        }
     }
 }
