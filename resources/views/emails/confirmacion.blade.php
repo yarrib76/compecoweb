@@ -26,6 +26,7 @@
 </table>
 
 <div>
+    <h4>Observaciones: {{$observaciones}}</h4>
     <h4>Gracias por utilizar nuestros servicios</h4>
 </div>
 

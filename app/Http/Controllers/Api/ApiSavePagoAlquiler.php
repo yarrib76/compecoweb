@@ -98,7 +98,8 @@ class ApiSavePagoAlquiler extends Controller {
                   'departamento' => Alquileres::where('id', Input::get('alquiler_id'))
                       ->where('estado_alquiler', 1)
                       ->get()->load('departamento')[0]->departamento->direccion,
-                  'importe' => Input::get('importe_alquiler')];
+                  'importe' => Input::get('importe_alquiler'),
+                  'observaciones' => Input::get('observaciones')];
         foreach ($destinatarios as $destinatario){
             if ($destinatario->userRoles->role_id == 1){
                 $email->enviarMail('emails.confirmacion',
