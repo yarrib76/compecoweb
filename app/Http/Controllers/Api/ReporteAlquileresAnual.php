@@ -12,10 +12,10 @@ class ReporteAlquileresAnual extends Controller {
     public function reporte(){
         $anio = Input::get('anio');
         $mesesPagos = [];
-        $cobro_alquileres = CobroAlquileres::groupBy('fecha_cobro')
-            ->selectRaw('sum(importe_alquiler) as sum, fecha_cobro')
+        $cobro_alquileres = CobroAlquileres::selectRaw('DATE_FORMAT(fecha_cobro, "%m-%Y") AS Month,sum(importe_alquiler) as sum, fecha_cobro')
             ->where('fecha_cobro', '>=' , $anio . '/01/01')
             ->where('fecha_cobro', '<=', $anio . '/12/31')
+            ->groupBy('month')
             ->get();
         $mesesPagos = $this->initMesesPagos($mesesPagos);
         $mesesPagos = $this->obtengoSumPorMeses($cobro_alquileres,$mesesPagos);
