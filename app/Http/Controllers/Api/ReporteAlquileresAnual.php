@@ -54,7 +54,7 @@ class ReporteAlquileresAnual extends Controller {
                     $mesesPagos[9] = ['Total' => $cobro_alquiler['sum']];
                     break;
                 Case 10:
-                    $mesesPagos[10] = ['Toal' => $cobro_alquiler['sum']];
+                    $mesesPagos[10] = ['Total' => $cobro_alquiler['sum']];
                     break;
                 Case 11:
                     $mesesPagos[11] = ['Total' => $cobro_alquiler['sum']];
