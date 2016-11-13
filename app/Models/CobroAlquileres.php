@@ -8,4 +8,8 @@ class CobroAlquileres extends Model {
     protected $fillable = ['alquiler_id','importe_alquiler','fecha_cobro','cobrador_id',
     'observaciones'];
 
+    public function alquileres(){
+        return $this->belongsTo('AlquilerAdmin\Models\Alquileres', 'alquiler_id');
+    }
+
 }

@@ -44,4 +44,5 @@ Route::group(['prefix' => 'api'],
         Route::get('/reporte_alquileres_pagos', 'Api\ReporteAlquileresPagos@reportes');
         Route::get('/reporte_impuestos_pagos', 'Api\ReporteImpuestosPagos@reportes');
         Route::get('/reporte_alquiler_anual', 'Api\ReporteAlquileresAnual@reporte');
+        Route::get('/reporte_alquileres_pagos_mensual', 'Api\ReporteAlquileresPagosMensual@reporte');
     });
