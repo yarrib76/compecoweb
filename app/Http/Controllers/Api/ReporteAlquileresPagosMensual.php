@@ -27,7 +27,8 @@ class ReporteAlquileresPagosMensual extends Controller {
         foreach ($cobro_alquileres_mensual as $cobro ){
             if ($cobro['alquileres']->estado_alquiler <> 0){
                 $inquilinosQuePagaron[$x] = ['id' => $cobro['alquileres']->load('usuario')->usuario->id,
-                'inquilino' => $cobro['alquileres']->load('usuario')->usuario->name];
+                'inquilino' => $cobro['alquileres']->load('usuario')->usuario->name,
+                'importe' => $cobro->importe_alquiler ];
             }
             $x++;
         }
