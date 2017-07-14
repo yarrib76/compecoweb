@@ -23,7 +23,7 @@ class ReporteAlquileresPagosMensual extends Controller {
 
     private function listaCobrosPorInquiulinos($cobro_alquileres_mensual){
         $x = 1;
-        $inquilinosQuePagaron[] = "";
+        $inquilinosQuePagaron = [];
         foreach ($cobro_alquileres_mensual as $cobro ){
             if ($cobro['alquileres']->estado_alquiler <> 0){
                 $inquilinosQuePagaron[$x] = ['id' => $cobro['alquileres']->load('usuario')->usuario->id,
