@@ -17,7 +17,6 @@ class ReporteAlquileresAnual extends Controller {
             ->where('alquileres.estado_alquiler', '<>' , 0)
             ->groupBy('month')
             ->get();
-        dd($cobro_alquileres);
         $mesesPagos = $this->initMesesPagos($mesesPagos);
         $mesesPagos = $this->obtengoSumPorMeses($cobro_alquileres,$mesesPagos);
         return $mesesPagos;
