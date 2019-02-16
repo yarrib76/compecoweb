@@ -33,8 +33,8 @@ class ContratosAlquilerController extends Controller {
 	{
         $departamentos = Departamentos::all()->load('estado');
         $departamentos = $this->formateoDatos($departamentos);
-        dd('Joel');
         $inquilinos = User::all()->load('userRoles');
+        dd('Joel');
         $inquilinos = $this->formateoDatosInquilinos($inquilinos);
         return view('ContratosAlquiler.nuevo', compact('departamentos','inquilinos'));
     }
