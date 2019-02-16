@@ -35,7 +35,6 @@ class ContratosAlquilerController extends Controller {
         $departamentos = $this->formateoDatos($departamentos);
         $inquilinos = User::all()->load('userRoles');
         $inquilinos = $this->formateoDatosInquilinos($inquilinos);
-        dd('Joel');
         return view('ContratosAlquiler.nuevo', compact('departamentos','inquilinos'));
     }
 
@@ -154,6 +153,7 @@ class ContratosAlquilerController extends Controller {
                 $conFormato[$dato->id] = $dato->name;
             }
         }
+        dd('Joel');
         if ($conFormato == "") {
             $conFormato[0] = "***Sin Disponibilidad***";
         }
