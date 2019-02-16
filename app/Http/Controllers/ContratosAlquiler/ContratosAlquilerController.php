@@ -31,7 +31,6 @@ class ContratosAlquilerController extends Controller {
 	 */
 	public function create()
 	{
-        dd('Joel');
         $departamentos = Departamentos::all()->load('estado');
         $departamentos = $this->formateoDatos($departamentos);
         $inquilinos = User::all()->load('userRoles');
