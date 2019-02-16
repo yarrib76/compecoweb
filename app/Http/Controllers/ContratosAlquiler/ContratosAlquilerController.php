@@ -150,7 +150,6 @@ class ContratosAlquilerController extends Controller {
         $conFormato = "";
         foreach ($datos as $dato) {
             if ($dato->userRoles->load('roles')->roles->nombre == "Inquilino") {
-                dd($dato);
                 $conFormato[$dato->id] = $dato->name;
             }
         }
